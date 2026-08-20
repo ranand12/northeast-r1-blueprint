@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Business Blueprint: Northeast Higher Education & R1 Research Territory</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+<style>
+:root {
+  --gc-blue: #4285F4;
+  --gc-red: #EA4335;
+  --gc-yellow: #FBBC04;
+  --gc-green: #34A853;
+  --gc-dark-blue: #185ABC;
+  --gc-purple: #8E24AA;
+  --gc-coral: #EE4D5D;
+  --gc-teal: #00897B;
+  --gc-lavender: #AC87EB;
+  --gc-sky: #078EFB;
+  --gc-text: #202124;
+  --gc-secondary: #5F6368;
+  --gc-border: #BDC1C6;
+  --gc-surface: #F8F9FA;
+  --gc-bg: #FFFFFF;
+  --radius: 12px;
+  --gc-blue-light: #D2E3FC;
+  --gc-blue-200: #8AB4F8;
+  --gc-blue-600: #1967D2;
+  --gc-blue-800: #174EA6;
+  --gc-gray-200: #E8EAED;
+  --gc-gray-300: #D9D9D9;
+  --font: 'Google Sans', Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font);
+  color: var(--gc-text);
+  background: #000;
+  overflow: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+body.cursor-visible { cursor: default; }
+.slide {
+  display: none;
+  position: absolute;
+  inset: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 80px;
+  text-align: left;
+  background: var(--gc-bg);
+}
+.slide.active { display: flex; }
+.slide.title-slide { align-items: flex-start; }
+.slide.centered { align-items: center; text-align: center; }
+.slide.dark-bg { background: var(--gc-text); color: #fff; }
+.slide.dark-bg h1, .slide.dark-bg h2, .slide.dark-bg .section-title { color: #fff; }
+.slide.dark-bg strong { color: var(--gc-blue-200); }
+.slide.colored-bg { color: #fff; }
+.slide.colored-bg.gc-blue-bg { background: var(--gc-blue); }
+.slide.colored-bg.gc-green-bg { background: var(--gc-green); }
+.slide.colored-bg .section-number, .slide.colored-bg .section-title { color: inherit; }
+
+h1 { font-size: 2.5rem; font-weight: 700; color: var(--gc-text); letter-spacing: -0.02em; line-height: 1.2; }
+h2 { font-size: 1.875rem; font-weight: 700; color: var(--gc-text); letter-spacing: -0.02em; line-height: 1.3; }
+h3 { font-size: 1.25rem; font-weight: 700; color: var(--gc-text); }
+strong { color: var(--gc-blue); font-weight: 700; }
+.subtext { color: var(--gc-secondary); font-size: 1.1rem; font-weight: 400; }
+.caption { color: var(--gc-secondary); font-size: 0.75rem; font-weight: 400; }
+.stat-number { font-size: 3.75rem; font-weight: 700; color: var(--gc-text); line-height: 1; }
+.stat-number.xl { font-size: 6rem; }
+.stat-label { font-size: 1.125rem; font-weight: 700; color: var(--gc-text); }
+.stat-desc { font-size: 1.125rem; font-weight: 400; color: var(--gc-secondary); }
+.section-number { font-size: 4rem; font-weight: 700; color: var(--gc-text); line-height: 1; margin-bottom: 8px; }
+.section-title { font-size: 2rem; font-weight: 700; color: var(--gc-text); }
+.section-subtitle { font-size: 1.25rem; color: var(--gc-secondary); margin-top: 16px; max-width: 60%; }
+.main-statement { font-size: 2rem; font-weight: 400; line-height: 1.5; max-width: 55%; }
+.main-statement strong { font-weight: 700; }
+
+.gc-banner { position: absolute; bottom: 0; left: 0; right: 0; height: 8px; display: flex; z-index: 100; }
+.gc-banner .gc-band { flex: 1; height: 100%; }
+.gc-banner .gc-band:nth-child(1) { background: var(--gc-blue); }
+.gc-banner .gc-band:nth-child(2) { background: var(--gc-red); }
+.gc-banner .gc-band:nth-child(3) { background: var(--gc-yellow); }
+.gc-banner .gc-band:nth-child(4) { background: var(--gc-green); }
+
+.gc-logo { position: absolute; bottom: 24px; left: 40px; z-index: 101; opacity: 0.7; font-size: 14px; font-weight: 500; }
+.slide.title-slide .gc-logo { font-size: 16px; }
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); pointer-events: none; }
+.reveal.shown { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.reveal.shown-fast { opacity: 1; transform: translateY(0); pointer-events: auto; transition-duration: 0s; }
+.reveal-scale { opacity: 0; transform: scale(0.7); transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+.reveal-scale.shown, .reveal-scale.shown-fast { opacity: 1; transform: scale(1); }
+.reveal-scale.shown-fast { transition-duration: 0s; }
+.reveal-blur { opacity: 0; filter: blur(20px); transform: scale(1.05); transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s ease; }
+.reveal-blur.shown, .reveal-blur.shown-fast { opacity: 1; filter: blur(0); transform: scale(1); }
+.reveal-blur.shown-fast { transition-duration: 0s; }
+
+.card { background: var(--gc-surface); border: 1px solid rgba(0,0,0,0.08); border-radius: var(--radius); padding: 28px 24px; text-align: left; }
+.card:hover { border-color: var(--gc-blue); box-shadow: 0 4px 16px rgba(66,133,244,0.12); }
+.card.blue-top { border-top: 3px solid var(--gc-blue); }
+.card.red-top { border-top: 3px solid var(--gc-red); }
+.card.yellow-top { border-top: 3px solid var(--gc-yellow); }
+.card.green-top { border-top: 3px solid var(--gc-green); }
+.card.purple-top { border-top: 3px solid var(--gc-purple); }
+.card.teal-top { border-top: 3px solid var(--gc-teal); }
+
+.card-grid { display: grid; gap: 16px; width: 100%; margin-top: 24px; }
+.card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.gc-badge { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #fff; flex-shrink: 0; margin-bottom: 12px; }
+.gc-badge.lg { width: 64px; height: 64px; font-size: 1.8rem; }
+.gc-badge.blue { background: var(--gc-blue); }
+.gc-badge.red { background: var(--gc-red); }
+.gc-badge.yellow { background: var(--gc-yellow); color: var(--gc-text); }
+.gc-badge.green { background: var(--gc-green); }
+.gc-badge.purple { background: var(--gc-purple); }
+.gc-badge.teal { background: var(--gc-teal); }
+.gc-badge.dark-blue { background: var(--gc-dark-blue); }
+.gc-badge .material-symbols-outlined { font-size: 24px; color: #fff; }
+.gc-badge.lg .material-symbols-outlined { font-size: 32px; }
+.gc-badge.yellow .material-symbols-outlined { color: var(--gc-text); }
+
+.gc-table { width: 100%; max-width: 1100px; border-collapse: collapse; font-size: 0.85rem; table-layout: fixed; }
+.gc-table th { background: var(--gc-blue); color: #fff; padding: 12px 16px; text-align: center; font-weight: 600; }
+.gc-table td { padding: 10px 16px; border-bottom: 1px solid var(--gc-border); text-align: center; }
+.gc-table tr:nth-child(even) td { background: var(--gc-surface); }
+.gc-table .highlight-cell { color: var(--gc-blue); font-weight: 700; }
+
+.gc-flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
+.gc-flow-box { padding: 16px 24px; border-radius: 8px; color: #fff; font-weight: 600; font-size: 0.85rem; text-align: center; min-width: 120px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.gc-flow-box.blue { background: var(--gc-blue); }
+.gc-flow-box.red { background: var(--gc-red); }
+.gc-flow-box.yellow { background: var(--gc-yellow); color: var(--gc-text); }
+.gc-flow-box.green { background: var(--gc-green); }
+.gc-flow-box.dark-blue { background: var(--gc-dark-blue); }
+.gc-flow-box.purple { background: var(--gc-purple); }
+.gc-flow-box.teal { background: var(--gc-teal); }
+.gc-flow-box .material-symbols-outlined { font-size: 28px; color: #fff; }
+.gc-flow-box.yellow .material-symbols-outlined { color: var(--gc-text); }
+.gc-flow-arrow { width: 32px; height: 2px; background: var(--gc-border); position: relative; flex-shrink: 0; }
+.gc-flow-arrow::after { content: ''; position: absolute; right: -1px; top: -5px; border: 6px solid transparent; border-left: 8px solid var(--gc-border); }
+
+.stats-row { display: flex; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--gc-gray-200); }
+.stats-row:last-child { border-bottom: none; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; width: 100%; }
+.stat-box { padding: 20px; border: 1px solid var(--gc-gray-200); border-radius: 8px; text-align: center; }
+.stat-box .stat-number { font-size: 2.5rem; }
+
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; font-size: 24px; vertical-align: -0.125em; display: inline-block; line-height: 1; flex-shrink: 0; }
+
+/* Bar chart */
+.bar-chart { width: 100%; margin-top: 16px; }
+.bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.bar-label-text { width: 180px; font-size: 0.75rem; font-weight: 500; text-align: right; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { flex: 1; height: 24px; background: var(--gc-gray-200); border-radius: 4px; overflow: hidden; position: relative; }
+.bar-fill { height: 100%; width: 0%; border-radius: 4px; transition: width 1.2s cubic-bezier(0.16,1,0.3,1); display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
+.bar-value { font-size: 0.65rem; font-weight: 700; color: #fff; white-space: nowrap; }
+.bar-value-outside { font-size: 0.65rem; font-weight: 600; color: var(--gc-secondary); margin-left: 8px; white-space: nowrap; }
+
+/* Org chart */
+.org-chart { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 0; margin-top: 20px; }
+.org-node { padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 0.8rem; text-align: center; color: #fff; min-width: 160px; position: relative; }
+.org-node.blue { background: var(--gc-blue); }
+.org-node.green { background: var(--gc-green); }
+.org-node.red { background: var(--gc-red); }
+.org-node.yellow { background: var(--gc-yellow); color: var(--gc-text); }
+.org-node.teal { background: var(--gc-teal); }
+.org-node.purple { background: var(--gc-purple); }
+.org-node.dark-blue { background: var(--gc-dark-blue); }
+.org-node .org-title { font-size: 0.7rem; font-weight: 400; opacity: 0.85; margin-top: 2px; }
+.org-connector { width: 2px; height: 24px; background: var(--gc-border); }
+.org-row { display: flex; gap: 20px; align-items: flex-start; justify-content: center; position: relative; }
+.org-h-line { position: absolute; top: 0; height: 2px; background: var(--gc-border); }
+.org-branch { display: flex; flex-direction: column; align-items: center; }
+.org-branch .org-connector { height: 20px; }
+
+/* Timeline */
+.timeline-container { width: 100%; margin-top: 24px; }
+.timeline-track { display: flex; align-items: stretch; gap: 12px; width: 100%; }
+.timeline-phase { flex: 1; border-radius: var(--radius); padding: 20px; position: relative; border: 1px solid rgba(0,0,0,0.08); }
+.timeline-phase .phase-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+.timeline-phase .phase-time { font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+.timeline-phase ul { font-size: 0.7rem; color: var(--gc-secondary); padding-left: 16px; margin: 0; line-height: 1.6; }
+.timeline-phase .phase-revenue { font-size: 0.7rem; font-weight: 700; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.08); }
+
+/* Progress dots */
+.progress { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 200; }
+.progress .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.12); transition: all 0.3s; cursor: pointer; }
+.progress .dot.active { background: var(--gc-blue); width: 24px; border-radius: 4px; }
+.slide-number { position: fixed; top: 30px; right: 40px; font-size: 14px; color: rgba(0,0,0,0.2); font-variant-numeric: tabular-nums; z-index: 200; }
+
+@keyframes softPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(66,133,244,0); }
+  50% { box-shadow: 0 0 30px 0 rgba(66,133,244,0.15); }
+}
+
+@media (max-width: 700px) {
+  .slide { padding: 40px 30px; }
+  .card-grid.cols-3, .card-grid.cols-4 { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .bar-label-text { width: 100px; }
+  .timeline-track { flex-direction: column; }
+  .org-row { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="slideNumber" class="slide-number">1 / 13</div>
+<div id="progress" class="progress"></div>
+
+<!-- SLIDE 1: Title -->
+<div class="slide active title-slide centered" id="slide-1">
+  <div class="gc-logo" style="font-size:16px;"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5F6368">Cloud</span></div>
+  <div class="reveal" data-step="0" style="text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <h1 style="font-size: 2.8rem;">Executive Business Blueprint:<br><strong>Northeast Higher Education<br>& R1 Research</strong> Territory</h1>
+  </div>
+  <div class="reveal" data-step="1" style="margin-top: 24px; text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <p class="subtext">Strategic Recommendation for Territory Transition</p>
+    <p style="color: var(--gc-secondary); font-size: 0.9rem; margin-top: 8px;">August 2026</p>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 2: The Strategic Shift -->
+<div class="slide dark-bg" id="slide-2">
+  <div class="gc-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#999">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <p class="main-statement" style="color: #fff; max-width: 65%;">Transition the Northeast territory from a broad <strong>State & Local Government</strong> model to a dedicated <strong>Higher Education & R1 Research Patch</strong> led by a Key Account Executive.</p>
+  </div>
+  <div class="reveal" data-step="1" style="margin-top: 32px;">
+    <p style="color: var(--gc-blue-200); font-size: 1.1rem; font-weight: 500;">Target: $13.56B annual R&D expenditure across 29 Northeast R1 universities</p>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 3: Section Break -->
+<div class="slide colored-bg gc-blue-bg" id="slide-3">
+  <div class="gc-logo"><span style="color:#fff">G</span><span style="color:#fff">o</span><span style="color:#fff">o</span><span style="color:#fff">g</span><span style="color:#fff">l</span><span style="color:#fff">e</span> <span style="color:rgba(255,255,255,0.7)">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <div class="section-number" style="color:#fff;">01</div>
+    <div class="section-title" style="color:#fff;">The Strategic Shift</div>
+    <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Why Higher Ed R1s outperform State & Local Government accounts across every revenue dimension</p>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 4: SLG vs R1 Comparison -->
+<div class="slide" id="slide-4">
+  <div class="gc-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5F6368">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <h2>Higher Ed R1s vs. <strong>State & Local Government</strong></h2>
+    <p class="subtext" style="margin-top: 8px;">Four dimensions that drive superior Google revenue impact</p>
+  </div>
+  <div class="card-grid cols-2 reveal-scale" data-step="1" style="margin-top: 20px;">
+    <div class="card blue-top">
+      <div class="gc-badge blue"><span class="material-symbols-outlined">speed</span></div>
+      <h3>Budget Velocity</h3>
+      <p style="font-size: 0.8rem; color: var(--gc-secondary); margin-top: 8px;"><strong style="color: var(--gc-red);">SLG:</strong> Annual legislative appropriations with delay risks</p>
+      <p style="font-size: 0.8rem; color: var(--gc-text); margin-top: 6px; font-weight: 500;"><strong>R1:</strong> Multi-year federal grants (NSF, NIH, DARPA) with pre-allocated compute budgets</p>
+    </div>
+    <div class="card green-top">
+      <div class="gc-badge green"><span class="material-symbols-outlined">memory</span></div>
+      <h3>Workload Profile</h3>
+      <p style="font-size: 0.8rem; color: var(--gc-secondary); margin-top: 8px;"><strong style="color: var(--gc-red);">SLG:</strong> Administrative SaaS, legacy ERP, citizen portals</p>
+      <p style="font-size: 0.8rem; color: var(--gc-text); margin-top: 6px; font-weight: 500;"><strong>R1:</strong> AI/ML training, genomics pipelines, HPC burst compute</p>
+    </div>
+  </div>
+  <div class="card-grid cols-2 reveal-scale" data-step="2">
+    <div class="card yellow-top">
+      <div class="gc-badge yellow"><span class="material-symbols-outlined">schedule</span></div>
+      <h3>Sales Cycle</h3>
+      <p style="font-size: 0.8rem; color: var(--gc-secondary); margin-top: 8px;"><strong style="color: var(--gc-red);">SLG:</strong> 12-24 months (formal RFP, multi-agency approvals)</p>
+      <p style="font-size: 0.8rem; color: var(--gc-text); margin-top: 6px; font-weight: 500;"><strong>R1:</strong> 3-6 months (PI engagement, grant-matching POCs)</p>
+    </div>
+    <div class="card red-top">
+      <div class="gc-badge red"><span class="material-symbols-outlined">trending_up</span></div>
+      <h3>Account Growth</h3>
+      <p style="font-size: 0.8rem; color: var(--gc-secondary); margin-top: 8px;"><strong style="color: var(--gc-red);">SLG:</strong> Linear expansion capped by agency budgets</p>
+      <p style="font-size: 0.8rem; color: var(--gc-text); margin-top: 6px; font-weight: 500;"><strong>R1:</strong> Exponential via multi-lab adoption & recurring grants</p>
+    </div>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 5: Section Break - Market Opportunity -->
+<div class="slide colored-bg gc-green-bg" id="slide-5">
+  <div class="gc-logo"><span style="color:#fff">G</span><span style="color:#fff">o</span><span style="color:#fff">o</span><span style="color:#fff">g</span><span style="color:#fff">l</span><span style="color:#fff">e</span> <span style="color:rgba(255,255,255,0.7)">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <div class="section-number" style="color:#fff;">02</div>
+    <div class="section-title" style="color:#fff;">Market Opportunity</div>
+    <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">29 R1 institutions generating $13.56 billion in annual R&D expenditure</p>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 6: Market Stats -->
+<div class="slide" id="slide-6">
+  <div class="gc-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5F6368">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <h2>Northeast Territory <strong>Market Opportunity</strong></h2>
+  </div>
+  <div class="stats-grid reveal-scale" data-step="1" style="margin-top: 32px;">
+    <div class="stat-box" style="border-top: 3px solid var(--gc-blue);">
+      <div class="stat-number" style="color: var(--gc-blue);" id="stat-1">$0</div>
+      <div class="stat-label">Billion</div>
+      <div class="stat-desc">Annual R&D Expenditure</div>
+    </div>
+    <div class="stat-box" style="border-top: 3px solid var(--gc-green);">
+      <div class="stat-number" style="color: var(--gc-green);" id="stat-2">0</div>
+      <div class="stat-label">R1 Institutions</div>
+      <div class="stat-desc">Across NY & New England</div>
+    </div>
+    <div class="stat-box" style="border-top: 3px solid var(--gc-red);">
+      <div class="stat-number" style="color: var(--gc-red); font-size: 2.2rem;" id="stat-3">$0</div>
+      <div class="stat-label">Cloud Compute TAM</div>
+      <div class="stat-desc">5%-12% of total R&D spend</div>
+    </div>
+  </div>
+  <div class="reveal" data-step="2" style="margin-top: 24px; width: 100%;">
+    <div class="gc-flow" style="justify-content: center; gap: 0;">
+      <div class="gc-flow-box blue" style="min-width: 200px;">
+        <span class="material-symbols-outlined">science</span>
+        <span>Federal Grants<br><small style="font-weight:400;">NSF, NIH, DARPA, DOE</small></span>
+      </div>
+      <div class="gc-flow-arrow"></div>
+      <div class="gc-flow-box green" style="min-width: 200px;">
+        <span class="material-symbols-outlined">cloud</span>
+        <span>Cloud Compute<br><small style="font-weight:400;">GPU, HPC, AI/ML</small></span>
+      </div>
+      <div class="gc-flow-arrow"></div>
+      <div class="gc-flow-box red" style="min-width: 200px;">
+        <span class="material-symbols-outlined">payments</span>
+        <span>Recurring ARR<br><small style="font-weight:400;">High NRR + Compounding</small></span>
+      </div>
+    </div>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 7: R1 Rankings Bar Chart -->
+<div class="slide" id="slide-7">
+  <div class="gc-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5F6368">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <h2>Regional R1 Landscape: <strong>Top 15 by R&D</strong></h2>
+    <p class="caption" style="margin-top: 4px;">Annual R&D Expenditure (FY 2023-2024)</p>
+  </div>
+  <div class="bar-chart reveal" data-step="1" id="barChart">
+    <div class="bar-row"><div class="bar-label-text">Harvard</div><div class="bar-track"><div class="bar-fill" data-target="100" style="background: var(--gc-blue-800);"><span class="bar-value">$1.49B</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">NYU</div><div class="bar-track"><div class="bar-fill" data-target="97.7" style="background: var(--gc-blue-600);"><span class="bar-value">$1.46B</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">Columbia</div><div class="bar-track"><div class="bar-fill" data-target="97" style="background: var(--gc-blue);"><span class="bar-value">$1.45B</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">Yale</div><div class="bar-track"><div class="bar-fill" data-target="90.3" style="background: var(--gc-blue);"><span class="bar-value">$1.35B</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">Cornell</div><div class="bar-track"><div class="bar-fill" data-target="85.8" style="background: var(--gc-blue-200);"><span class="bar-value">$1.28B</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">MIT</div><div class="bar-track"><div class="bar-fill" data-target="77.3" style="background: var(--gc-blue-200);"><span class="bar-value">$1.16B</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">Boston U</div><div class="bar-track"><div class="bar-fill" data-target="52.5" style="background: var(--gc-blue-200);"><span class="bar-value">$784M</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">U of Rochester</div><div class="bar-track"><div class="bar-fill" data-target="38.8" style="background: var(--gc-blue-light);"><span class="bar-value">$580M</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">Tufts</div><div class="bar-track"><div class="bar-fill" data-target="29.7" style="background: var(--gc-blue-light);"><span class="bar-value">$444M</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">UConn</div><div class="bar-track"><div class="bar-fill" data-target="27.7" style="background: var(--gc-blue-light);"><span class="bar-value">$414M</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">SUNY Buffalo</div><div class="bar-track"><div class="bar-fill" data-target="26.8" style="background: var(--gc-blue-light);"><span class="bar-value">$400M</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">SUNY Stony Brook</div><div class="bar-track"><div class="bar-fill" data-target="26" style="background: var(--gc-blue-light);"><span class="bar-value">$389M</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">Mount Sinai</div><div class="bar-track"><div class="bar-fill" data-target="25.3" style="background: var(--gc-blue-light);"><span class="bar-value">$379M</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">Brown</div><div class="bar-track"><div class="bar-fill" data-target="21.9" style="background: var(--gc-blue-light);"><span class="bar-value">$328M</span></div></div></div>
+    <div class="bar-row"><div class="bar-label-text">UMass Chan Medical</div><div class="bar-track"><div class="bar-fill" data-target="21.5" style="background: var(--gc-blue-light);"><span class="bar-value">$322M</span></div></div></div>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 8: Section Break - Org Structure -->
+<div class="slide colored-bg" id="slide-8" style="background: var(--gc-dark-blue);">
+  <div class="gc-logo"><span style="color:#fff">G</span><span style="color:#fff">o</span><span style="color:#fff">o</span><span style="color:#fff">g</span><span style="color:#fff">l</span><span style="color:#fff">e</span> <span style="color:rgba(255,255,255,0.7)">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <div class="section-number" style="color:#fff;">03</div>
+    <div class="section-title" style="color:#fff;">Organizational Structure</div>
+    <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Aligned by regional cluster, workload tier, and revenue velocity</p>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 9: Org Chart -->
+<div class="slide" id="slide-9">
+  <div class="gc-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5F6368">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <h2>Proposed <strong>Operating Model</strong></h2>
+  </div>
+  <div class="org-chart reveal-scale" data-step="1">
+    <div class="org-node dark-blue" style="min-width: 280px;">
+      <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle; margin-right: 4px;">supervisor_account</span>
+      Key Account Executive (KAE)
+      <div class="org-title">Northeast Higher Ed & R1 Lead</div>
+    </div>
+    <div class="org-connector"></div>
+    <div style="width: 60%; height: 2px; background: var(--gc-border);"></div>
+    <div class="org-row" style="width: 100%; justify-content: center; gap: 40px;">
+      <div class="org-branch">
+        <div class="org-connector"></div>
+        <div class="org-node blue" style="min-width: 200px;">
+          <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">location_city</span>
+          NY R1s & Systems AE
+          <div class="org-title">Nikki</div>
+        </div>
+      </div>
+      <div class="org-branch">
+        <div class="org-connector"></div>
+        <div class="org-node green" style="min-width: 200px;">
+          <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">forest</span>
+          New England R1s AE
+          <div class="org-title">Michelle</div>
+        </div>
+      </div>
+      <div class="org-branch">
+        <div class="org-connector"></div>
+        <div class="org-node yellow" style="min-width: 200px;">
+          <span class="material-symbols-outlined" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">call</span>
+          Inside Sales Rep
+          <div class="org-title">R2s & Inbound</div>
+        </div>
+      </div>
+    </div>
+    <div class="org-connector" style="height: 16px;"></div>
+    <div style="width: 48%; height: 2px; background: var(--gc-border);"></div>
+    <div class="org-connector" style="height: 16px;"></div>
+    <div class="org-node teal" style="min-width: 90%; padding: 16px 24px;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px;">engineering</span> Customer Engineers (NY + NE)</div>
+        <div style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px;">monitoring</span> Revenue Tech Specialist</div>
+        <div style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px;">code</span> Forward Deployed Engineer</div>
+      </div>
+      <div class="org-title" style="margin-top: 6px;">Dedicated Engineering Pod</div>
+    </div>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 10: Role Definitions -->
+<div class="slide" id="slide-10">
+  <div class="gc-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5F6368">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <h2>Role <strong>Definitions</strong> & Scope</h2>
+  </div>
+  <table class="gc-table reveal" data-step="1" style="margin-top: 20px; font-size: 0.75rem;">
+    <tr>
+      <th style="width: 18%;">Role</th>
+      <th style="width: 25%;">Patch & Scope</th>
+      <th>Core Responsibilities</th>
+    </tr>
+    <tr>
+      <td><strong style="color: var(--gc-dark-blue);">KAE Lead</strong></td>
+      <td>Entire NE Territory</td>
+      <td style="text-align: left;">Territory strategy, executive sponsor alignment (VPs of Research, CIOs), quota attainment, GPU forecasting</td>
+    </tr>
+    <tr>
+      <td><strong style="color: var(--gc-blue);">AE - Nikki</strong></td>
+      <td>NY R1s, SUNY, CUNY</td>
+      <td style="text-align: left;">Columbia, NYU, Cornell, Mount Sinai, Rochester, RPI, Syracuse, 4 SUNY Centers</td>
+    </tr>
+    <tr>
+      <td><strong style="color: var(--gc-green);">AE - Michelle</strong></td>
+      <td>New England R1s</td>
+      <td style="text-align: left;">Harvard, MIT, Yale, BU, Tufts, UConn, Brown, Dartmouth, UMass System, UVM, UNH</td>
+    </tr>
+    <tr>
+      <td><strong style="color: var(--gc-yellow); color: #F9A825;">ISR</strong></td>
+      <td>NE R2s & Inbound</td>
+      <td style="text-align: left;">Transactional licensing, MSAs, initial qualification, field rep triage</td>
+    </tr>
+    <tr>
+      <td><strong style="color: var(--gc-teal);">CEs (2x)</strong></td>
+      <td>1x NY, 1x NE</td>
+      <td style="text-align: left;">Presales architecture, RFP responses, security reviews, GCP onboarding</td>
+    </tr>
+    <tr>
+      <td><strong style="color: var(--gc-teal);">Rev Tech Specialist</strong></td>
+      <td>Shared NY & NE</td>
+      <td style="text-align: left;">Weekly researcher office hours, PyTorch/JAX optimization, POC-to-production</td>
+    </tr>
+    <tr>
+      <td><strong style="color: var(--gc-teal);">FDE</strong></td>
+      <td>Strategic Deals</td>
+      <td style="text-align: left;">Slurm-to-GCP burst scripts, Vertex AI pipelines, hands-on deployment</td>
+    </tr>
+  </table>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 11: Strategic Hurdles -->
+<div class="slide" id="slide-11">
+  <div class="gc-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5F6368">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <h2>Overcoming <strong>Strategic Hurdles</strong></h2>
+    <p class="subtext" style="margin-top: 6px;">Three core challenges and how we solve them</p>
+  </div>
+  <div class="card-grid cols-3" style="margin-top: 20px;">
+    <div class="card blue-top reveal-scale" data-step="1">
+      <div class="gc-badge blue"><span class="material-symbols-outlined">monitoring</span></div>
+      <h3 style="font-size: 1rem;">Revenue-First Technical Alignment</h3>
+      <p style="font-size: 0.78rem; color: var(--gc-secondary); margin-top: 10px; line-height: 1.6;"><strong style="color: var(--gc-red);">Pitfall:</strong> PSO/SI models optimize for billable hours, not consumption velocity.</p>
+      <p style="font-size: 0.78rem; color: var(--gc-text); margin-top: 8px; line-height: 1.6;"><strong>Solution:</strong> Revenue Tech Specialist focused solely on removing PI blockers, running researcher office hours, and bridging to PSO for infrastructure.</p>
+    </div>
+    <div class="card green-top reveal-scale" data-step="2">
+      <div class="gc-badge green"><span class="material-symbols-outlined">savings</span></div>
+      <h3 style="font-size: 1rem;">Deal Acceleration Funds</h3>
+      <p style="font-size: 0.78rem; color: var(--gc-secondary); margin-top: 10px; line-height: 1.6;"><strong style="color: var(--gc-red);">Challenge:</strong> Researchers need proof before committing grant dollars.</p>
+      <p style="font-size: 0.78rem; color: var(--gc-text); margin-top: 8px; line-height: 1.6;"><strong>Solution:</strong> $25K-$100K credit per strategic lab with consumption milestones. Benchmark GCP against AWS and on-prem.</p>
+    </div>
+    <div class="card red-top reveal-scale" data-step="3">
+      <div class="gc-badge red"><span class="material-symbols-outlined">dns</span></div>
+      <h3 style="font-size: 1rem;">Compute Availability</h3>
+      <p style="font-size: 0.78rem; color: var(--gc-secondary); margin-top: 10px; line-height: 1.6;"><strong style="color: var(--gc-red);">Constraint:</strong> GPU allocation challenges during peak grant cycles.</p>
+      <p style="font-size: 0.78rem; color: var(--gc-text); margin-top: 8px; line-height: 1.6;"><strong>Solution:</strong> HPC Toolkit for hybrid bursting, TPU v5/v6 + Axion alternatives, consortium GPU reservations (Empire AI, MGHPCC).</p>
+    </div>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 12: Strategic Partnerships -->
+<div class="slide" id="slide-12">
+  <div class="gc-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5F6368">Cloud</span></div>
+  <div class="reveal" data-step="0">
+    <h2>2027 Strategic <strong>Co-Sell Partnerships</strong></h2>
+    <p class="subtext" style="margin-top: 6px;">Executive-level alignment with key partners at the field level</p>
+  </div>
+  <div class="card-grid cols-2" style="margin-top: 24px;">
+    <div class="card reveal-scale" data-step="1" style="border-top: 3px solid #76B900; padding: 24px;">
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+        <div class="gc-badge lg" style="background: #76B900;"><span class="material-symbols-outlined">developer_board</span></div>
+        <div>
+          <h3 style="font-size: 1.15rem; margin: 0;">NVIDIA</h3>
+          <p style="font-size: 0.75rem; color: var(--gc-secondary); margin-top: 2px;">GPU Infrastructure & HPC Co-Sell</p>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; line-height: 1.7;">
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <span class="material-symbols-outlined" style="color: #76B900; font-size: 18px; margin-top: 2px;">handshake</span>
+          <div><strong>Executive Alignment:</strong> Joint account planning with NVIDIA Higher Ed field reps to coordinate GPU capacity allocation for R1 research clusters</div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <span class="material-symbols-outlined" style="color: #76B900; font-size: 18px; margin-top: 2px;">memory</span>
+          <div><strong>Co-Sell Motion:</strong> GCP A3/A4 instances with H100/B200 GPUs positioned directly into grant proposals for training workloads</div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <span class="material-symbols-outlined" style="color: #76B900; font-size: 18px; margin-top: 2px;">hub</span>
+          <div><strong>Field Play:</strong> Joint researcher workshops at top R1s pairing NVIDIA CUDA/NeMo frameworks with GCP infrastructure for genomics, LLM fine-tuning, and simulation</div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 10px;">
+          <span class="material-symbols-outlined" style="color: #76B900; font-size: 18px; margin-top: 2px;">target</span>
+          <div><strong>2027 Target:</strong> Aligned GPU reservations across Empire AI & MGHPCC consortium deals</div>
+        </div>
+      </div>
+    </div>
+    <div class="card reveal-scale" data-step="2" style="border-top: 3px solid #D97706; padding: 24px;">
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+        <div class="gc-badge lg" style="background: #D97706;"><span class="material-symbols-outlined">psychology</span></div>
+        <div>
+          <h3 style="font-size: 1.15rem; margin: 0;">Anthropic</h3>
+          <p style="font-size: 0.75rem; color: var(--gc-secondary); margin-top: 2px;">AI/ML Research & Model Deployment Co-Sell</p>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; line-height: 1.7;">
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <span class="material-symbols-outlined" style="color: #D97706; font-size: 18px; margin-top: 2px;">handshake</span>
+          <div><strong>Executive Alignment:</strong> Coordinate with Anthropic's enterprise team to position Claude models on Vertex AI as the research-grade LLM for academic institutions</div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <span class="material-symbols-outlined" style="color: #D97706; font-size: 18px; margin-top: 2px;">auto_awesome</span>
+          <div><strong>Co-Sell Motion:</strong> Claude Code, Claude Co-work on GCP, Gemini Enterprise with Claude models for centralized governance and security with Model Armor</div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+          <span class="material-symbols-outlined" style="color: #D97706; font-size: 18px; margin-top: 2px;">school</span>
+          <div><strong>Field Play:</strong> Joint AI safety & responsible AI workshops with faculty, positioning Anthropic's alignment research alongside GCP's enterprise guardrails</div>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 10px;">
+          <span class="material-symbols-outlined" style="color: #D97706; font-size: 18px; margin-top: 2px;">target</span>
+          <div><strong>2027 Target:</strong> Claude API consumption via Vertex at 10+ R1 campuses, driving GCP committed-use revenue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal" data-step="3" style="margin-top: 20px; width: 100%;">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 24px;">
+      <div class="gc-flow-box" style="background: #76B900; min-width: 160px;">
+        <span class="material-symbols-outlined">developer_board</span>
+        <span>NVIDIA<br><small style="font-weight:400;">GPU / HPC</small></span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+        <div class="gc-flow-arrow" style="width: 40px;"></div>
+      </div>
+      <div class="gc-flow-box blue" style="min-width: 220px; padding: 20px 28px;">
+        <span class="material-symbols-outlined">cloud</span>
+        <span>Google Cloud<br><small style="font-weight:400;">Platform & Vertex AI</small></span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+        <div class="gc-flow-arrow" style="width: 40px; transform: rotate(180deg);"></div>
+      </div>
+      <div class="gc-flow-box" style="background: #D97706; min-width: 160px;">
+        <span class="material-symbols-outlined">psychology</span>
+        <span>Anthropic<br><small style="font-weight:400;">Claude Models</small></span>
+      </div>
+    </div>
+    <p style="text-align: center; font-size: 0.8rem; color: var(--gc-secondary); margin-top: 12px;">Both partners co-sell through Google Cloud into R1 research accounts</p>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<!-- SLIDE 13: Thank You -->
+<div class="slide centered" id="slide-13">
+  <div class="gc-logo" style="font-size: 16px;"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span> <span style="color:#5F6368">Cloud</span></div>
+  <div class="reveal-blur" data-step="0" style="text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <h1 style="font-size: 3.5rem;">Thank you</h1>
+    <p class="subtext" style="margin-top: 16px;">Northeast Higher Education & R1 Research Territory</p>
+    <p style="color: var(--gc-secondary); font-size: 0.9rem; margin-top: 8px;">Ready to capture $13.56B in R&D-driven cloud compute</p>
+  </div>
+  <div class="gc-banner"><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div><div class="gc-band"></div></div>
+</div>
+
+<script>
+const totalSlides = 13;
+let current = 0;
+let revealStep = {};
+for (let i = 0; i < totalSlides; i++) revealStep[i] = -1;
+
+const progress = document.getElementById('progress');
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); });
+  progress.appendChild(dot);
+}
+
+function getMaxStep(slideIdx) {
+  const slide = document.querySelectorAll('.slide')[slideIdx];
+  const reveals = slide.querySelectorAll('[data-step]');
+  let max = -1;
+  reveals.forEach(r => { max = Math.max(max, parseInt(r.dataset.step)); });
+  return max;
+}
+
+function showReveals(slideIdx, upToStep, animate) {
+  const slide = document.querySelectorAll('.slide')[slideIdx];
+  const reveals = slide.querySelectorAll('[data-step]');
+  reveals.forEach(r => {
+    const step = parseInt(r.dataset.step);
+    if (step <= upToStep) {
+      r.classList.add(animate ? 'shown' : 'shown-fast');
+      r.classList.remove(animate ? 'shown-fast' : '');
+    } else {
+      r.classList.remove('shown', 'shown-fast');
+    }
+  });
+}
+
+function triggerBarChart(slideIdx) {
+  if (slideIdx === 6) {
+    const bars = document.querySelectorAll('#barChart .bar-fill');
+    bars.forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+  }
+}
+
+let countUpDone = false;
+function triggerCountUp(slideIdx) {
+  if (slideIdx === 5 && !countUpDone) {
+    countUpDone = true;
+    countUp(document.getElementById('stat-1'), 13.56, 1500, '$', 'B');
+    countUpInt(document.getElementById('stat-2'), 29, 1200);
+    countUpRange(document.getElementById('stat-3'), '$675M–$1.6B', 1500);
+  }
+}
+
+function countUp(el, target, duration, prefix, suffix) {
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = prefix + (target * eased).toFixed(2) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function countUpInt(el, target, duration) {
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(target * eased);
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function countUpRange(el, finalText, duration) {
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    if (p >= 1) { el.textContent = finalText; return; }
+    const eased = 1 - Math.pow(1 - p, 3);
+    const low = Math.floor(675 * eased);
+    const high = Math.floor(1600 * eased);
+    el.textContent = '$' + low + 'M–$' + (high >= 1000 ? (high/1000).toFixed(1) + 'B' : high + 'M');
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function goTo(n, direction) {
+  const slides = document.querySelectorAll('.slide');
+  if (n === current && direction === undefined) {
+    const maxStep = getMaxStep(current);
+    revealStep[current] = maxStep;
+    showReveals(current, maxStep, false);
+    triggerBarChart(current);
+    triggerCountUp(current);
+    return;
+  }
+  slides[current].classList.remove('active');
+  progress.children[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, totalSlides - 1));
+  slides[current].classList.add('active');
+  progress.children[current].classList.add('active');
+  document.getElementById('slideNumber').textContent = (current + 1) + ' / ' + totalSlides;
+
+  if (direction === 'back') {
+    const maxStep = getMaxStep(current);
+    revealStep[current] = maxStep;
+    showReveals(current, maxStep, false);
+    triggerBarChart(current);
+    triggerCountUp(current);
+  } else {
+    revealStep[current] = -1;
+    showReveals(current, -1, false);
+    const bars = document.querySelectorAll('#barChart .bar-fill');
+    bars.forEach(bar => { bar.style.width = '0%'; });
+    if (current === 5) countUpDone = false;
+    advance();
+  }
+}
+
+function advance() {
+  const maxStep = getMaxStep(current);
+  if (revealStep[current] < maxStep) {
+    revealStep[current]++;
+    showReveals(current, revealStep[current], true);
+    if (revealStep[current] >= 1) {
+      triggerBarChart(current);
+      triggerCountUp(current);
+    }
+    return true;
+  }
+  return false;
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+    e.preventDefault();
+    if (!advance()) {
+      if (current < totalSlides - 1) goTo(current + 1, 'forward');
+    }
+  }
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    if (current > 0) goTo(current - 1, 'back');
+  }
+  if (e.key === 'f') document.documentElement.requestFullscreen?.();
+});
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.progress')) return;
+  if (e.detail === 2) { document.documentElement.requestFullscreen?.(); return; }
+  if (!advance()) {
+    if (current < totalSlides - 1) goTo(current + 1, 'forward');
+  }
+});
+
+let cursorTimer;
+document.addEventListener('mousemove', () => {
+  document.body.classList.add('cursor-visible');
+  clearTimeout(cursorTimer);
+  cursorTimer = setTimeout(() => document.body.classList.remove('cursor-visible'), 3000);
+});
+
+advance();
+</script>
+</body>
+</html>
